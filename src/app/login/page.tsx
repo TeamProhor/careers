@@ -107,7 +107,7 @@ function LoginForm() {
             width={96}
             height={32}
             priority
-            className="h-6 w-auto object-contain"
+            className="h-6 w-auto object-contain dark:filter-none filter invert"
           />
           <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
             /

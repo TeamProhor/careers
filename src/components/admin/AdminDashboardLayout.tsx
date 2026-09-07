@@ -51,7 +51,7 @@ export function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
           alt="Prohor"
           width={80}
           height={28}
-          className="h-5 w-auto object-contain"
+          className="h-5 w-auto object-contain dark:filter-none filter invert"
         />
       }
       brandHref="/admin"
