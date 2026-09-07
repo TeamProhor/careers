@@ -1,8 +1,8 @@
-import type { JobPosition } from "../types";
+import type { JobPosition } from "@/types";
 
 export type { JobPosition };
 
-export const FALLBACK_POSITIONS: JobPosition[] = [
+export const jobs: JobPosition[] = [
   {
     id: "webapp-developer",
     title: "ওয়েবঅ্যাপ ডেভেলপার",
@@ -145,3 +145,11 @@ export const FALLBACK_POSITIONS: JobPosition[] = [
     isActive: true,
   },
 ];
+
+export function getJobs(): JobPosition[] {
+  return jobs.filter((j) => j.isActive !== false);
+}
+
+export function getJobBySlug(slug: string): JobPosition | undefined {
+  return jobs.find((j) => j.id === slug);
+}

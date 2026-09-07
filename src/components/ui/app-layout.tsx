@@ -34,7 +34,7 @@ export function AppLayout({
   children,
   brandTitle,
   brandLogo,
-  brandHref = "/admin",
+  brandHref = "/",
   navItems,
   currentPath,
   user,

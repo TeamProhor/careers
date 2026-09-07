@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Briefcase, ChevronRight } from "reicon-react";
 import { Badge } from "@/components/ui/badge";
 import { GridPattern } from "@/components/ui/grid-pattern";
-import type { JobPosition } from "@/lib/jobs";
+import type { JobPosition } from "@/types";
 
 interface JobCardProps {
   position: JobPosition;

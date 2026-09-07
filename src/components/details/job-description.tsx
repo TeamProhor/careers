@@ -1,6 +1,6 @@
 import { Check } from "reicon-react";
 import { Separator } from "@/components/ui/separator";
-import type { JobPosition } from "@/lib/jobs";
+import type { JobPosition } from "@/types";
 
 interface JobDescriptionProps {
   position: JobPosition;

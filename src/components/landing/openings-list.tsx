@@ -10,7 +10,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import type { JobPosition } from "@/lib/jobs";
+import type { JobPosition } from "@/types";
 import { JobCard } from "./job-card";
 
 function DashedLine({ className, ...props }: React.ComponentProps<"div">) {

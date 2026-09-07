@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Search } from "reicon-react";
 import { HeroSection } from "@/components/landing/hero-section";
 import { OpeningsList } from "@/components/landing/openings-list";
@@ -11,23 +11,12 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { FALLBACK_POSITIONS } from "@/lib/jobs";
-import type { JobPosition } from "@/types";
+import { getJobs } from "@/lib/data/jobs";
+
+const positions = getJobs();
 
 export default function CareersPage() {
-  const [positions, setPositions] = useState<JobPosition[]>(FALLBACK_POSITIONS);
   const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    fetch("/api/jobs")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-          setPositions(data.data);
-        }
-      })
-      .catch(() => {});
-  }, []);
 
   const filteredPositions = useMemo(() => {
     return positions.filter((pos) => {
@@ -38,7 +27,7 @@ export default function CareersPage() {
         pos.location.toLowerCase().includes(q)
       );
     });
-  }, [positions, searchQuery]);
+  }, [searchQuery]);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground font-sans selection:bg-muted selection:text-foreground">
