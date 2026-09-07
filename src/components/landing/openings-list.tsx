@@ -16,7 +16,7 @@ import { JobCard } from "./job-card";
 function DashedLine({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={`absolute border border-dashed border-border ${className}`}
+      className={`absolute border-collapse border border-dashed border-border ${className}`}
       {...props}
     />
   );
