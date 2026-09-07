@@ -14,13 +14,12 @@ export function JobCard({ position }: JobCardProps) {
       href={position.href}
       className="group relative flex flex-col justify-between h-full overflow-hidden no-underline"
     >
-      <div className="pointer-events-none absolute inset-0 size-full opacity-50 transition-opacity duration-300 group-hover:opacity-80">
+      <div className="mask-[radial-gradient(farthest-side_at_top,white,transparent)] pointer-events-none absolute inset-0 size-full opacity-60 transition-opacity duration-300 group-hover:opacity-100">
         <GridPattern
-          className="absolute inset-0 size-full stroke-foreground/10 fill-foreground/[0.02]"
+          className="absolute inset-0 size-full stroke-foreground/15 fill-foreground/5"
           height={32}
           width={32}
           x={16}
-          cr={8}
         />
       </div>
       <div className="relative z-10 space-y-4">

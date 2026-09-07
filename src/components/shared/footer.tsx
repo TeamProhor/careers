@@ -11,7 +11,7 @@ export function Footer() {
             alt="Prohor"
             width={72}
             height={24}
-            className="h-4.5 w-auto object-contain dark:filter-none filter invert"
+            className="h-4.5 w-auto object-contain"
           />
           <span>© {new Date().getFullYear()} সর্বস্বত্ব সংরক্ষিত।</span>
         </div>
