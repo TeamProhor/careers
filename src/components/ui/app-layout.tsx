@@ -92,6 +92,7 @@ export function AppLayout({
             </div>
             {onLogout && (
               <button
+                type="button"
                 onClick={onLogout}
                 className="mt-2 w-full rounded-lg px-3 py-1.5 text-left text-xs text-muted-foreground hover:bg-muted hover:text-destructive transition-colors"
               >

@@ -1,5 +1,5 @@
-import { Briefcase, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { Briefcase, ChevronRight } from "reicon-react";
 import { Badge } from "@/components/ui/badge";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import type { JobPosition } from "@/lib/jobs";

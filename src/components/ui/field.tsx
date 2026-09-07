@@ -23,6 +23,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
 
 function FieldLabel({ className, ...props }: React.ComponentProps<"label">) {
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Reusable label component, htmlFor passed via props
     <label
       data-slot="field-label"
       className={cn("text-xs font-medium leading-none", className)}
@@ -55,4 +56,4 @@ function FieldLegend({
   );
 }
 
-export { Field, FieldGroup, FieldLabel, FieldSet, FieldLegend };
+export { Field, FieldGroup, FieldLabel, FieldLegend, FieldSet };

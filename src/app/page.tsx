@@ -1,7 +1,7 @@
 "use client";
 
-import { Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { Search } from "reicon-react";
 import { HeroSection } from "@/components/landing/hero-section";
 import { OpeningsList } from "@/components/landing/openings-list";
 import { Footer } from "@/components/shared/footer";

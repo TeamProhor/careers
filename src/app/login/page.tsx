@@ -1,10 +1,10 @@
 "use client";
 
-import { CheckCircle2, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
+import { CheckCircle, Loader } from "reicon-react";
 import { Button } from "@/components/ui/button";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,13 @@ import { toast } from "@/components/ui/toast";
 
 function GoogleIcon({ size = 18 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      role="img"
+      aria-label="Google"
+    >
       <path
         d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
         fill="#4285F4"
@@ -130,7 +136,7 @@ function LoginForm() {
           {message ? (
             <div className="flex flex-col items-center gap-3 py-6 text-center">
               <div className="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                <CheckCircle2 size={28} />
+                <CheckCircle size={28} />
               </div>
               <div className="space-y-1">
                 <h3 className="text-sm font-semibold text-foreground">
@@ -169,7 +175,7 @@ function LoginForm() {
               >
                 {isLoading ? (
                   <span className="flex items-center gap-2">
-                    <Loader2 size={16} className="animate-spin" />
+                    <Loader size={16} className="animate-spin" />
                     পাঠানো হচ্ছে...
                   </span>
                 ) : (

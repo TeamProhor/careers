@@ -46,9 +46,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "verification_tokens_token_unique": {
-          "columns": [
-            "token"
-          ],
+          "columns": ["token"],
           "nullsNotDistinct": false,
           "name": "verification_tokens_token_unique"
         }
@@ -119,9 +117,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "users_email_unique": {
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "nullsNotDistinct": false,
           "name": "users_email_unique"
         }
@@ -262,12 +258,8 @@
           "tableFrom": "applications",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

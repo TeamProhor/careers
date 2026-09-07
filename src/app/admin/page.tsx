@@ -1,15 +1,15 @@
 "use client";
 
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AlertTriangle,
   ArrowDown,
-  CheckCircle2,
-  Loader2,
-  Pencil,
+  CheckCircle,
+  Edit,
+  Loader,
   Search,
-} from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+} from "reicon-react";
 import { ApplicationReviewDialog } from "@/components/admin/ApplicationReviewDialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -104,14 +104,14 @@ export default function AdminApplicationsPage() {
             ক্যারিয়ার পদ ব্যবস্থাপনা
           </Button>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-            <CheckCircle2 size={14} />
+            <CheckCircle size={14} />
             অ্যাডমিন মোড
           </span>
         </div>
       </div>
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <Loader2 size={24} className="animate-spin text-muted-foreground" />
+          <Loader size={24} className="animate-spin text-muted-foreground" />
           <p className="text-xs text-muted-foreground">তথ্য লোড হচ্ছে...</p>
         </div>
       ) : !user?.isAdmin ? (
@@ -274,7 +274,7 @@ export default function AdminApplicationsPage() {
                       {
                         id: "review",
                         label: "রিভিউ ও আপডেট",
-                        icon: <Pencil size={13} />,
+                        icon: <Edit size={13} />,
                         variant: "default",
                         onClick: () => setSelectedApp(app),
                       },

@@ -105,6 +105,7 @@ export function ListCard({
           {actions.map((action) => {
             const btn = (
               <button
+                type="button"
                 key={action.id}
                 onClick={action.onClick}
                 className={cn(

@@ -24,6 +24,7 @@ export function GridPattern({
         "pointer-events-none absolute inset-0 size-full",
         className,
       )}
+      aria-hidden="true"
       {...props}
     >
       <defs>

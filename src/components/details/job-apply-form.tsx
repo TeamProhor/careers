@@ -1,9 +1,9 @@
 "use client";
 
-import { CheckCircle, Info, Loader2, Upload, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CheckCircle, Information, Loader, Upload, X } from "reicon-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -163,7 +163,7 @@ export function JobApplyForm({
       <div id="apply" className="scroll-mt-20 lg:col-span-5">
         <Card className="sticky top-20 border border-border bg-card p-12 text-center">
           <div className="flex flex-col items-center justify-center gap-3">
-            <Loader2 size={20} className="animate-spin text-muted-foreground" />
+            <Loader size={20} className="animate-spin text-muted-foreground" />
             <p className="text-xs text-muted-foreground">যাচাই করা হচ্ছে...</p>
           </div>
         </Card>
@@ -185,7 +185,7 @@ export function JobApplyForm({
           </CardHeader>
           <CardContent className="space-y-6 pt-2">
             <div className="rounded-xl border border-border bg-muted/30 p-4 text-xs text-muted-foreground flex items-start gap-3">
-              <Info size={18} className="text-primary shrink-0 mt-0.5" />
+              <Information size={18} className="text-primary shrink-0 mt-0.5" />
               <span>
                 আপনার তথ্য ও আবেদনের অগ্রগতি সুরক্ষিত রাখতে অনুগ্রহ করে প্রথমে সাইন ইন
                 করুন।

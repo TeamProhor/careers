@@ -1,5 +1,5 @@
-import { Briefcase } from "lucide-react";
 import type * as React from "react";
+import { Briefcase } from "reicon-react";
 import { Button } from "@/components/ui/button";
 import { DecorIcon } from "@/components/ui/decor-icon";
 import {

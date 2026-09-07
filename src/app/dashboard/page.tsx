@@ -1,8 +1,8 @@
 "use client";
 
-import { Briefcase, Info, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Briefcase, Information, Loader } from "reicon-react";
 import { Footer } from "@/components/shared/footer";
 import { Header } from "@/components/shared/header";
 import { Badge } from "@/components/ui/badge";
@@ -85,14 +85,14 @@ export default function CandidateDashboardPage() {
         </div>
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 gap-3">
-            <Loader2 size={24} className="animate-spin text-muted-foreground" />
+            <Loader size={24} className="animate-spin text-muted-foreground" />
             <p className="text-xs text-muted-foreground">তথ্য লোড হচ্ছে...</p>
           </div>
         ) : !user ? (
           <Card className="border border-border bg-card p-6 sm:p-10 text-center">
             <div className="mx-auto flex max-w-md flex-col items-center gap-4">
               <div className="rounded-full bg-muted/60 p-3">
-                <Info size={24} className="text-muted-foreground" />
+                <Information size={24} className="text-muted-foreground" />
               </div>
               <div>
                 <h2 className="text-base sm:text-lg font-medium text-foreground">
@@ -136,7 +136,9 @@ export default function CandidateDashboardPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 gap-3 md:hidden">
               {applications.map((app) => {
-                const statusInfo = STATUS_MAP[app.status || "pending"] ?? {
+                const statusInformation = STATUS_MAP[
+                  app.status || "pending"
+                ] ?? {
                   label: "জমা হয়েছে",
                   variant: "secondary" as const,
                 };
@@ -161,8 +163,8 @@ export default function CandidateDashboardPage() {
                           ID: {app.jobId}
                         </span>
                       </div>
-                      <Badge variant={statusInfo.variant}>
-                        {statusInfo.label}
+                      <Badge variant={statusInformation.variant}>
+                        {statusInformation.label}
                       </Badge>
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-xs border-t border-border/60 pt-2 text-muted-foreground">
@@ -244,7 +246,7 @@ export default function CandidateDashboardPage() {
                   </TableHeader>
                   <TableBody>
                     {applications.map((app) => {
-                      const statusInfo = STATUS_MAP[
+                      const statusInformation = STATUS_MAP[
                         app.status || "pending"
                       ] ?? { label: "জমা হয়েছে", variant: "secondary" as const };
                       const createdDate = app.createdAt
@@ -273,8 +275,8 @@ export default function CandidateDashboardPage() {
                               : "অন-সাইট"}
                           </TableCell>
                           <TableCell>
-                            <Badge variant={statusInfo.variant}>
-                              {statusInfo.label}
+                            <Badge variant={statusInformation.variant}>
+                              {statusInformation.label}
                             </Badge>
                           </TableCell>
                           <TableCell>

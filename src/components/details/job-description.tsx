@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check } from "reicon-react";
 import { Separator } from "@/components/ui/separator";
 import type { JobPosition } from "@/lib/jobs";
 

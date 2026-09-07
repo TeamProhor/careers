@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowRight, PanelLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ArrowRight, Menu } from "reicon-react";
 import { Button } from "@/components/ui/button";
 import { ResponsiveDialog } from "@/components/ui/responsive-dialog";
 
@@ -123,7 +123,7 @@ export function HeaderNav({
           onClick={() => setIsMobileMenuOpen(true)}
           aria-label="ন্যাভিগেশন মেনু"
         >
-          <PanelLeft size={16} />
+          <Menu size={16} />
         </Button>
       </div>
       <ResponsiveDialog

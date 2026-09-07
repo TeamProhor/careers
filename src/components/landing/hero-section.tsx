@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "reicon-react";
 import { Button } from "@/components/ui/button";
 
 interface HeroSectionProps {

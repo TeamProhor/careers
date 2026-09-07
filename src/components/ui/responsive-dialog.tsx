@@ -1,10 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -13,14 +11,12 @@ import {
 } from "@/components/ui/dialog";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { cn } from "@/lib/utils";
 
 interface ResponsiveDialogProps {
   open: boolean;
@@ -31,7 +27,7 @@ interface ResponsiveDialogProps {
   footer?: React.ReactNode;
 }
 
-export function useIsMobile() {
+function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {

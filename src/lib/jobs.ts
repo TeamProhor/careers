@@ -145,5 +145,3 @@ export const FALLBACK_POSITIONS: JobPosition[] = [
     isActive: true,
   },
 ];
-
-export const POSITIONS: JobPosition[] = FALLBACK_POSITIONS;

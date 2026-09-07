@@ -1,18 +1,18 @@
 "use client";
 
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AlertTriangle,
   ChevronDown,
   ChevronUp,
+  Edit,
   Eye,
-  Loader2,
-  Pencil,
+  Loader,
   Plus,
   Search,
   Trash2,
-} from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+} from "reicon-react";
 import { JobDeleteDialog } from "@/components/admin/JobDeleteDialog";
 import { JobFormDialog } from "@/components/admin/JobFormDialog";
 import { Button } from "@/components/ui/button";
@@ -135,7 +135,7 @@ export default function AdminJobsManagementPage() {
       </div>
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <Loader2 size={24} className="animate-spin text-muted-foreground" />
+          <Loader size={24} className="animate-spin text-muted-foreground" />
           <p className="text-xs text-muted-foreground">তথ্য লোড হচ্ছে...</p>
         </div>
       ) : !user?.isAdmin ? (
@@ -248,7 +248,7 @@ export default function AdminJobsManagementPage() {
                       {
                         id: "edit",
                         label: "সম্পাদনা",
-                        icon: <Pencil size={13} />,
+                        icon: <Edit size={13} />,
                         variant: "outline",
                         onClick: () => {
                           setEditingJob(job);

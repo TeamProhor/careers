@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowUpRight, Link2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ArrowUpRight, Link2 } from "reicon-react";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";

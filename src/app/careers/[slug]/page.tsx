@@ -1,8 +1,8 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
 import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Loader } from "reicon-react";
 import { JobApplyForm } from "@/components/details/job-apply-form";
 import { JobBreadcrumb } from "@/components/details/job-breadcrumb";
 import { JobDescription } from "@/components/details/job-description";
@@ -36,7 +36,7 @@ export default function CareerDetailPage() {
   if (!position)
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <Loader2 size={24} className="animate-spin text-muted-foreground" />
+        <Loader size={24} className="animate-spin text-muted-foreground" />
       </div>
     );
 

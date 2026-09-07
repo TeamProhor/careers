@@ -20,6 +20,8 @@ export function DecorIcon({ className, position }: DecorIconProps) {
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
+      role="img"
+      aria-label="Decorative icon"
     >
       <path d="M5 12h14M12 5v14" />
     </svg>

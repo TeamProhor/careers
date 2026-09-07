@@ -1,10 +1,10 @@
 "use client";
 
-import { Briefcase, CheckCircle2, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Briefcase, CheckCircle, Sparkles } from "reicon-react";
 import { AppLayout, type NavItem } from "@/components/ui/app-layout";
 
 interface AdminDashboardLayoutProps {
@@ -39,7 +39,7 @@ export function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
   const navItems: NavItem[] = [
     { title: "আবেদনসমূহ", url: "/admin", icon: Briefcase },
     { title: "ক্যারিয়ার সুযোগ", url: "/admin/jobs", icon: Sparkles },
-    { title: "ওয়েবসাইট ভিউ", url: "/", icon: CheckCircle2 },
+    { title: "ওয়েবসাইট ভিউ", url: "/", icon: CheckCircle },
   ];
 
   return (
