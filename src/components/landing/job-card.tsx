@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Briefcase, ChevronRight } from "reicon-react";
 import { Badge } from "@/components/ui/badge";
 import { GridPattern } from "@/components/ui/grid-pattern";
-import type { JobPosition } from "@/types";
+import type { JobMetadata } from "@/lib/data/jobs";
 
 interface JobCardProps {
-  position: JobPosition;
+  position: JobMetadata;
 }
 
 export function JobCard({ position }: JobCardProps) {
@@ -39,7 +39,7 @@ export function JobCard({ position }: JobCardProps) {
             {position.title}
           </h3>
           <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground line-clamp-2">
-            {position.responsibilities[0]}
+            {position.description}
           </p>
         </div>
       </div>

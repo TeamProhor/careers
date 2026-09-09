@@ -23,7 +23,7 @@ export function HeroSection({ openCount }: HeroSectionProps) {
             <Button
               size="lg"
               className="rounded-full px-6 text-sm font-medium shadow-xs w-full sm:w-auto justify-center"
-              render={<a href="#positions" />}
+              render={<a href="#positions" aria-label="উন্মুক্ত পদ দেখুন" />}
             >
               {openCount}টি উন্মুক্ত পদ দেখুন
               <ArrowRight size={16} className="ml-1" />

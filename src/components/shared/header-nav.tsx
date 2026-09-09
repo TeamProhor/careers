@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, Menu } from "reicon-react";
 import { Button } from "@/components/ui/button";
@@ -31,7 +30,7 @@ export function HeaderNav({
         <Button
           size="sm"
           className="rounded-full px-4 text-xs font-medium"
-          render={<a href={actionHref} onClick={handleActionClick} />}
+          render={<a href={actionHref} onClick={handleActionClick} aria-label={actionLabel} />}
         >
           {actionLabel}
           {actionHref.startsWith("#") && !actionHref.includes("apply") && (
@@ -43,7 +42,7 @@ export function HeaderNav({
         <Button
           size="sm"
           className="rounded-full px-3 text-2xs font-medium h-8"
-          render={<a href={actionHref} onClick={handleActionClick} />}
+          render={<a href={actionHref} onClick={handleActionClick} aria-label={actionLabel} />}
         >
           {actionLabel}
         </Button>
@@ -67,10 +66,14 @@ export function HeaderNav({
             size="sm"
             className="rounded-full text-xs h-10"
             render={
-              <a href={actionHref} onClick={(e) => {
-                handleActionClick(e);
-                setIsMobileMenuOpen(false);
-              }} />
+              <a
+                href={actionHref}
+                onClick={(e) => {
+                  handleActionClick(e);
+                  setIsMobileMenuOpen(false);
+                }}
+                aria-label={actionLabel}
+              />
             }
           >
             {actionLabel}

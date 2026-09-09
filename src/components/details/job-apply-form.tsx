@@ -20,6 +20,113 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { formatApplicationMessage, sendTelegramMessage } from "@/lib/telegram";
+
+interface WorkLink {
+  id: string;
+  url: string;
+}
+
+interface WorkLinksFieldProps {
+  links: WorkLink[];
+  onChange: (id: string, value: string) => void;
+  onAdd: () => void;
+  onRemove: (id: string) => void;
+}
+
+function WorkLinksField({
+  links,
+  onChange,
+  onAdd,
+  onRemove,
+}: WorkLinksFieldProps) {
+  return (
+    <FieldSet>
+      <div className="flex items-center justify-between">
+        <FieldLegend variant="label" className="text-xs font-medium">
+          আপনার পূর্বের কাজের লিঙ্কসমূহ (কমপক্ষে ৩টি বাধ্যতামূলক) *
+        </FieldLegend>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="text-xs text-primary hover:bg-primary/10 h-7 px-2"
+          onClick={onAdd}
+        >
+          + আরও লিঙ্ক যোগ করুন
+        </Button>
+      </div>
+      <FieldGroup className="gap-2.5 mt-2">
+        {links.map((item, idx) => (
+          <div key={item.id} className="flex items-center gap-2">
+            <Input
+              type="url"
+              required={idx < 3}
+              placeholder={
+                idx === 0
+                  ? "https://github.com/... বা কাজের লিংক ১"
+                  : idx === 1
+                    ? "https://dribbble.com/... বা কাজের লিংক ২"
+                    : idx === 2
+                      ? "https://your-portfolio.com/... বা কাজের লিংক ৩"
+                      : `কাজের লিংক ${idx + 1}`
+              }
+              value={item.url}
+              onChange={(e) => onChange(item.id, e.target.value)}
+              className="text-xs"
+            />
+            {links.length > 3 && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 text-muted-foreground hover:text-destructive shrink-0"
+                onClick={() => onRemove(item.id)}
+              >
+                <X size={14} />
+              </Button>
+            )}
+          </div>
+        ))}
+      </FieldGroup>
+    </FieldSet>
+  );
+}
+
+interface ApplicationSuccessProps {
+  onReset: () => void;
+}
+
+function ApplicationSuccess({ onReset }: ApplicationSuccessProps) {
+  return (
+    <div id="apply" className="scroll-mt-20 lg:col-span-5">
+      <Card className="sticky top-20 border border-border bg-card shadow-sm">
+        <CardContent className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+          <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <CheckCircle size={24} />
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-base font-semibold text-foreground">
+              আবেদন সফলভাবে গৃহীত হয়েছে
+            </h3>
+            <p className="text-xs text-muted-foreground max-w-xs">
+              আবেদন করার জন্য ধন্যবাদ। আমাদের টিম আপনার প্রোফাইল পর্যালোচনা করে যোগাযোগ
+              করবে।
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-2"
+            onClick={onReset}
+          >
+            পুনরায় আরেকটি আবেদন জমা দিন
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
 interface JobApplyFormProps {
   jobTitle: string;
@@ -75,9 +182,11 @@ export function JobApplyForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const validLinks = formData.workLinks
-      .map((item) => item.url.trim())
-      .filter((url) => url.length > 0);
+    const validLinks: string[] = [];
+    for (const item of formData.workLinks) {
+      const url = item.url.trim();
+      if (url.length > 0) validLinks.push(url);
+    }
 
     if (validLinks.length < 3) {
       toast.error("অনুগ্রহ করে কাজের অন্তত ৩টি লিঙ্ক প্রদান করুন");
@@ -92,24 +201,19 @@ export function JobApplyForm({
     setIsSubmitting(true);
 
     const submitPromise = async () => {
-      const res = await fetch("/api/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || undefined,
-          jobTitle,
-          jobId,
-          workLinks: validLinks,
-        }),
+      const msg = formatApplicationMessage({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        jobTitle,
+        jobId,
+        workLinks: validLinks,
       });
 
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "আবেদন ব্যর্থ হয়েছে");
+      const sent = await sendTelegramMessage(msg);
+      if (!sent) {
+        throw new Error("আবেদন জমা দিতে ব্যর্থ হয়েছে");
       }
-      return data;
     };
 
     try {
@@ -120,40 +224,14 @@ export function JobApplyForm({
       });
       setIsSubmitted(true);
     } catch {
+      // toast.promise already handles error display
     } finally {
       setIsSubmitting(false);
     }
   };
 
   if (isSubmitted) {
-    return (
-      <div id="apply" className="scroll-mt-20 lg:col-span-5">
-        <Card className="sticky top-20 border border-border bg-card shadow-sm">
-          <CardContent className="flex flex-col items-center justify-center gap-4 py-12 text-center">
-            <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <CheckCircle size={24} />
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-base font-semibold text-foreground">
-                আবেদন সফলভাবে গৃহীত হয়েছে
-              </h3>
-              <p className="text-xs text-muted-foreground max-w-xs">
-                আবেদন করার জন্য ধন্যবাদ। আমাদের টিম আপনার প্রোফাইল পর্যালোচনা করে
-                ইমেইলে যোগাযোগ করবে।
-              </p>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="mt-2"
-              onClick={() => setIsSubmitted(false)}
-            >
-              পুনরায় আরেকটি আবেদন জমা দিন
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
+    return <ApplicationSuccess onReset={() => setIsSubmitted(false)} />;
   }
 
   return (
@@ -219,60 +297,12 @@ export function JobApplyForm({
                 />
               </Field>
 
-              <FieldSet>
-                <div className="flex items-center justify-between">
-                  <FieldLegend
-                    variant="label"
-                    className="text-xs font-medium"
-                  >
-                    আপনার পূর্বের কাজের লিঙ্কসমূহ (কমপক্ষে ৩টি বাধ্যতামূলক) *
-                  </FieldLegend>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="text-xs text-primary hover:bg-primary/10 h-7 px-2"
-                    onClick={handleAddWorkLink}
-                  >
-                    + আরও লিঙ্ক যোগ করুন
-                  </Button>
-                </div>
-                <FieldGroup className="gap-2.5 mt-2">
-                  {formData.workLinks.map((item, idx) => (
-                    <div key={item.id} className="flex items-center gap-2">
-                      <Input
-                        type="url"
-                        required={idx < 3}
-                        placeholder={
-                          idx === 0
-                            ? "https://github.com/... বা কাজের লিংক ১"
-                            : idx === 1
-                              ? "https://dribbble.com/... বা কাজের লিংক ২"
-                              : idx === 2
-                                ? "https://your-portfolio.com/... বা কাজের লিংক ৩"
-                                : `কাজের লিংক ${idx + 1}`
-                        }
-                        value={item.url}
-                        onChange={(e) =>
-                          handleWorkLinkChange(item.id, e.target.value)
-                        }
-                        className="text-xs"
-                      />
-                      {formData.workLinks.length > 3 && (
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-muted-foreground hover:text-destructive shrink-0"
-                          onClick={() => handleRemoveWorkLink(item.id)}
-                        >
-                          <X size={14} />
-                        </Button>
-                      )}
-                    </div>
-                  ))}
-                </FieldGroup>
-              </FieldSet>
+              <WorkLinksField
+                links={formData.workLinks}
+                onChange={handleWorkLinkChange}
+                onAdd={handleAddWorkLink}
+                onRemove={handleRemoveWorkLink}
+              />
 
               <FieldSet>
                 <FieldLegend variant="label" className="text-xs font-medium">

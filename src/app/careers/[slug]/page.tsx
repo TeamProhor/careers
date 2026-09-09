@@ -1,19 +1,34 @@
-"use client";
-
-import { notFound, useParams } from "next/navigation";
+import { notFound } from "next/navigation";
 import { JobApplyForm } from "@/components/details/job-apply-form";
 import { JobBreadcrumb } from "@/components/details/job-breadcrumb";
-import { JobDescription } from "@/components/details/job-description";
 import { Footer } from "@/components/shared/footer";
 import { Header } from "@/components/shared/header";
-import { getJobBySlug } from "@/lib/data/jobs";
+import GraphicsDesigner from "@/content/jobs/graphics-designer.mdx";
+import QaEngineer from "@/content/jobs/qa-engineer.mdx";
+import WebappDeveloper from "@/content/jobs/webapp-developer.mdx";
+import { getJobBySlug, getJobSlugs } from "@/lib/data/jobs";
 
-export default function CareerDetailPage() {
-  const params = useParams();
-  const slug = params?.slug as string;
+const mdxComponents: Record<string, React.ComponentType> = {
+  "webapp-developer": WebappDeveloper,
+  "graphics-designer": GraphicsDesigner,
+  "qa-engineer": QaEngineer,
+};
+
+export function generateStaticParams() {
+  return getJobSlugs().map((slug) => ({ slug }));
+}
+
+export default async function CareerDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const position = getJobBySlug(slug);
-
   if (!position) return notFound();
+
+  const Content = mdxComponents[slug];
+  if (!Content) return notFound();
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground font-sans selection:bg-muted selection:text-foreground">
@@ -29,7 +44,21 @@ export default function CareerDetailPage() {
           title={position.title}
         />
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <JobDescription position={position} />
+          <div className="flex flex-col gap-10 lg:col-span-7">
+            <div className="flex flex-col gap-4 border-b border-border pb-8">
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl leading-tight">
+                {position.title}
+              </h1>
+              {position.description && (
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {position.description}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col gap-8">
+              <Content />
+            </div>
+          </div>
           <JobApplyForm jobTitle={position.title} jobId={position.id} />
         </div>
       </main>

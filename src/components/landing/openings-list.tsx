@@ -10,7 +10,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import type { JobPosition } from "@/types";
+import type { JobMetadata } from "@/lib/data/jobs";
 import { JobCard } from "./job-card";
 
 function DashedLine({ className, ...props }: React.ComponentProps<"div">) {
@@ -23,7 +23,7 @@ function DashedLine({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 interface OpeningsListProps {
-  positions: JobPosition[];
+  positions: JobMetadata[];
   onResetFilters: () => void;
 }
 
